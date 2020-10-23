@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-property-card',
@@ -12,10 +12,8 @@ export class PropertyCardComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  Property: any={
-    "Name": "Sai-Vrundavan",
-    "Type": "House",
-    "Price": 12000
-  }
+  // This is the example of Propery.Binding types of Data Binding
+  @Input() property :any
+
 
 }
