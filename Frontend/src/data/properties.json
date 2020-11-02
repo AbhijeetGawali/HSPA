@@ -1,43 +1,50 @@
 [
   {
-
+    "id":1,
+    "SellRent":1,
   "Name": "Sai-Vrundavan",
   "Type": "House",
-  "Price": 12000
+  "Price": 12000,
+  "image":"prop-1"
 },
 {
+  "id":2,
+  "SellRent":2,
   "Name": "Sangam Villa ",
   "Type": "House",
-  "Price": 12000
+  "Price": 12000,
+  "image":"prop-2"
 },
 {
-
+  "id":3,
+  "SellRent":2,
   "Name": "Rao ",
   "Type": "House",
-  "Price": 12000
+  "Price": 12000,
+  "image":"prop-3"
 },
 {
-
+  "id":4,
+  "SellRent":1,
   "Name": "Template ",
   "Type": "House",
-  "Price": 12000
+  "Price": 12000,
+  "image":"prop-4"
 },
 {
-
+  "id":5,
+  "SellRent":1,
   "Name": "Jaguar",
   "Type": "House",
-  "Price": 12000
+  "Price": 12000,
+  "image":"prop-5"
 },
 {
-
-  "Name": "Maruti Suzuki",
-  "Type": "House",
-  "Price": 12000
-},
-{
-
+  "id":7,
+  "SellRent":1,
   "Name": "House Villa",
   "Type": "House",
-  "Price": 12000
+  "Price": 12000,
+  "image":""
 }
 ]
