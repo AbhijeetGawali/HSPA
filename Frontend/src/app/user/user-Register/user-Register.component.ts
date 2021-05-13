@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { User } from 'src/app/model/user';
+import { UserService } from 'src/app/services/user.service';
+import { AlertifyService } from 'src/app/services/alertify.service';
 
 @Component({
   selector: 'app-user-Register',
@@ -9,20 +12,30 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class UserRegisterComponent implements OnInit {
 
   registrationForm:FormGroup;
+  userSubmitted: boolean;
 
-  constructor() { }
+  // Add data in Local Storage and use service :  UserService
+  user: User;
+
+  constructor(private fb: FormBuilder,
+    private userService: UserService,
+    private alertify: AlertifyService) {}
 
   ngOnInit() {
-    this.registrationForm = new FormGroup({
-      username: new FormControl(null, Validators.required),
-      email: new FormControl(null, [Validators.required,Validators.minLength(8)]),
-      password: new FormControl(null, Validators.required),
-      confirmPassword: new FormControl(null, Validators.required),
-      mobile: new FormControl(null, [Validators.required,Validators.minLength(8)])
-     }
-      , this.passwordMatchingValidatior
-     )
-    }
+
+    this.createRegisterationForm();
+  }
+
+  // This Example of Reactive Forms validations
+  createRegisterationForm() {
+    this.registrationForm =  this.fb.group({
+      username: [null, Validators.required],
+      email: [null, [Validators.required, Validators.email]],
+      password: [null, [Validators.required, Validators.minLength(8)]],
+      confirmPassword: [null, Validators.required],
+      mobile: [null, [Validators.required, Validators.maxLength(10)]]
+    }, {validators: this.passwordMatchingValidatior})
+  };
 
     //Add Custom Validator
     passwordMatchingValidatior(fg: FormGroup): Validators {
@@ -53,7 +66,31 @@ export class UserRegisterComponent implements OnInit {
 
 
   onSubmit(){
-    console.log(this.registrationForm);
+    console.log(this.registrationForm.value);
+    this.userSubmitted = true;
+
+    if (this.registrationForm.valid) {
+      // this.user = Object.assign(this.user, this.registerationForm.value);
+      this.userService.addUser(this.userData());
+      this.onReset();
+      this.alertify.success('Congrats, you are successfully registered');
+  } else {
+      this.alertify.error('Kindly provide the required fields');
+  }
+  }
+
+  onReset() {
+    this.userSubmitted = false;
+    this.registrationForm.reset();
+  }
+
+  userData(): User {
+    return this.user = {
+      userName: this.username.value,
+      email: this.email.value,
+      password: this.password.value,
+      mobile: this.mobile.value
+    }
   }
 
 }

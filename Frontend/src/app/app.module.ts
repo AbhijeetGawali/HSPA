@@ -13,7 +13,7 @@ import { HousingService } from './services/housing.service';
 import { AddPropertyComponent } from './property/add-property/add-property.component';
 import { PropertyDetailComponent } from './property/property-detail/property-detail.component';
 import { UserLoginComponent } from './user/user-login/user-login.component';
-import {UserRegisterComponent} from './user/user-Register/user-Register.component';
+import { UserRegisterComponent } from './user/user-Register/user-Register.component';
 
 
 // Define Routing Path
