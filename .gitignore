@@ -72,3 +72,5 @@ Frontend/.firebaserc
 Frontend/firebase.json
 .github/workflows/firebase-hosting-merge.yml
 .github/workflows/firebase-hosting-pull-request.yml
+Frontend/src/app/property/property-detail/property-detail.component.scss
+Frontend/src/app/property/property-detail/property-detail.component.scss
