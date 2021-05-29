@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { HousingService } from 'src/app/services/housing.service';
-import { IProperty } from './IProperty.Interface';
+import { ActivatedRoute } from '@angular/router';
+import { IPropertyBase } from 'src/app/model/ipropertybase';
 
 @Component({
   selector: 'app-property-list',
@@ -9,33 +9,46 @@ import { IProperty } from './IProperty.Interface';
   styleUrls: ['./property-list.component.css']
 })
 export class PropertyListComponent implements OnInit {
-
   SellRent = 1;
-  properties: Array<IProperty>;
+  properties: IPropertyBase[];
+  Today = new Date();
+  City = '';
+  SearchCity = '';
+  SortbyParam = '';
+  SortDirection = 'asc';
 
-  // Inject Service here
-  constructor(private housingservice:HousingService, private route:ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private housingService: HousingService) { }
 
   ngOnInit(): void {
-
-    if(this.route.snapshot.url.toString()){
-      this.SellRent=2;
+    if (this.route.snapshot.url.toString()) {
+      this.SellRent = 2; // Means we are on rent-property URL else we are on base URL
     }
-
-    //Call Service
-    this.housingservice.getAllProperties(this.SellRent).subscribe(
-      data=>{
-        this.properties=data;
-      },
-      error=>{
-        console.log('httperror');
+    this.housingService.getAllProperties(this.SellRent).subscribe(
+        data => {
+        this.properties = data;
+        console.log(data);
+      }, error => {
+        console.log('httperror:');
         console.log(error);
       }
     );
+  }
 
-    // this.http.get('/data/properties.json').subscribe(
-      //data=>{this.properties=data;}
-    //   data=>console.log(data));
+  onCityFilter() {
+    this.SearchCity = this.City;
+  }
+
+  onCityFilterClear() {
+    this.SearchCity = '';
+    this.City = '';
+  }
+
+  onSortDirection() {
+    if (this.SortDirection === 'desc') {
+      this.SortDirection = 'asc';
+    } else {
+      this.SortDirection = 'desc';
+    }
   }
 
 }

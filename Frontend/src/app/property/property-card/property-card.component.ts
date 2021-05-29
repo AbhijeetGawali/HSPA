@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IProperty } from '../property-list/IProperty.Interface';
+//import { IProperty } from '../property-list/IProperty.Interface';
+import { IPropertyBase } from 'src/app/model/ipropertybase';
 
 @Component({
   selector: 'app-property-card',
@@ -14,7 +15,7 @@ export class PropertyCardComponent implements OnInit {
   }
 
   // This is the example of Propery.Binding types of Data Binding
-  @Input() property :IProperty
-
+  @Input() property: IPropertyBase;
+  @Input() hideIcons: boolean;
 
 }
